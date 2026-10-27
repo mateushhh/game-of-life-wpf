@@ -397,6 +397,38 @@
                             </StackPanel>
                         </Grid>
                     </ContentControl>
+                    
+                    <!-- -->
+                    <Separator Margin="0,12,0,16" Background="LightGray"/>
+
+                    <TextBlock Text="VISUALIZATION" 
+                               FontSize="12" 
+                               FontWeight="Bold"
+                               Margin="0,0,0,10"/>
+
+                    <TextBlock Text="PLANT COLOR" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="PlantColorComboBox" 
+                              Height="32" 
+                              Margin="0,0,0,10" 
+                              SelectedIndex="0"
+                              SelectionChanged="PlantColorComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Green" Tag="Green"/>
+                        <ComboBoxItem Content="Forest Green" Tag="ForestGreen"/>
+                        <ComboBoxItem Content="Lime Green" Tag="LimeGreen"/>
+                        <ComboBoxItem Content="Teal" Tag="Teal"/>
+                    </ComboBox>
+
+                    <TextBlock Text="ANIMAL COLOR" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="AnimalColorComboBox" 
+                              Height="32" 
+                              Margin="0,0,0,10" 
+                              SelectedIndex="0"
+                              SelectionChanged="AnimalColorComboBox_SelectionChanged">
+                        <ComboBoxItem Content="Red" Tag="Red"/>
+                        <ComboBoxItem Content="Crimson" Tag="Crimson"/>
+                        <ComboBoxItem Content="Dark Orange" Tag="DarkOrange"/>
+                        <ComboBoxItem Content="Purple" Tag="Purple"/>
+                    </ComboBox>
                 </StackPanel>
             </ScrollViewer>
         </Border>

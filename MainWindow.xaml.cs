@@ -28,10 +28,12 @@ namespace GameOfLife
         private int _alivePlants = 0;
         private int _bornPlants = 0;
         private int _deadPlants = 0;
+        private Brush _plantBrush = Brushes.Green;
 
         private int _aliveAnimals = 0;
         private int _bornAnimals = 0;
         private int _deadAnimals = 0;
+        private Brush _animalBrush = Brushes.Red;
 
         public MainWindow()
         {
@@ -78,6 +80,9 @@ namespace GameOfLife
 
         private void DrawBoard()
         {
+            if (cells == null || BoardCanvas == null)
+                return;
+
             BoardCanvas.Children.Clear();
 
             BoardCanvas.Width = BoardWidth * CellSize;
@@ -95,7 +100,7 @@ namespace GameOfLife
                         {
                             Width = CellSize,
                             Height = CellSize,
-                            Fill = Brushes.Green
+                            Fill = _plantBrush
                         };
 
                         Canvas.SetLeft(plantShape, x * CellSize);
@@ -110,7 +115,7 @@ namespace GameOfLife
                         {
                             Width = CellSize * 0.70,
                             Height = CellSize * 0.70,
-                            Fill = Brushes.Red
+                            Fill = _animalBrush
                         };
 
                         Canvas.SetLeft(animalShape, x * CellSize + CellSize * 0.15);
@@ -613,6 +618,32 @@ namespace GameOfLife
                 {
                     MessageBox.Show($"Error when loading the save file: \n{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void PlantColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PlantColorComboBox == null || PlantColorComboBox.SelectedItem == null)
+                return;
+
+            if (PlantColorComboBox?.SelectedItem is ComboBoxItem item && item.Tag is string colorName)
+            {
+                var converter = new BrushConverter();
+                _plantBrush = (Brush)(converter.ConvertFromString(colorName) ?? Brushes.Green);
+                DrawBoard();
+            }
+        }
+
+        private void AnimalColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AnimalColorComboBox == null || AnimalColorComboBox.SelectedItem == null)
+                return;
+
+            if (AnimalColorComboBox?.SelectedItem is ComboBoxItem item && item.Tag is string colorName)
+            {
+                var converter = new BrushConverter();
+                _animalBrush = (Brush)(converter.ConvertFromString(colorName) ?? Brushes.Red);
+                DrawBoard();
             }
         }
 
